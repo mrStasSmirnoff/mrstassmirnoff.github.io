@@ -244,3 +244,6 @@ yarn-error.log*
 .env*
 .vercel/
 next-env.d.ts
+
+# Personal
+AGENTS.md
