@@ -17,7 +17,7 @@ export const faqs = [
   {
     question: "What languages do you speak?",
     answer:
-      "English has been my main working language for the past decade. Ich kann mich auch privat und beruflich auf Deutsch unterhalten. И, конечно, по-русски — моя фамилия говорит сама за себя.",
+      "English has been my main working language for the past decade. Ich kann mich auch privat und beruflich auf Deutsch unterhalten. И, конечно, по-русски.",
   },
   {
     question: "What is the best way to get in touch?",

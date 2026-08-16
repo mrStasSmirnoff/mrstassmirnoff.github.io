@@ -1,3 +1,4 @@
+// Personal details and homepage expertise live here; components only render them.
 export const siteConfig = {
   name: "Stanislav Smirnov",
   role: "Lead Data Scientist",
@@ -8,7 +9,6 @@ export const siteConfig = {
   github: "https://github.com/mrStasSmirnoff",
   linkedIn: "https://www.linkedin.com/in/smirnov-stanislav/",
   profileImage: "/title-page-photo-2.JPG",
-  resumeAvailable: true,
   resumePath: "/resume.pdf",
 };
 

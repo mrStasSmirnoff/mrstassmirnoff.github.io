@@ -12,7 +12,7 @@ export default function Home() {
     <main>
       <section className="hero">
         <div className="container hero-grid">
-          <div className="hero-copy">
+          <div>
             <h1 className="hero-name">{siteConfig.name}</h1>
             <p className="hero-role">{siteConfig.role} · {siteConfig.location}</p>
             <p className="hero-intro">{siteConfig.intro}</p>
@@ -22,17 +22,15 @@ export default function Home() {
             </div>
           </div>
           <div className="portrait-wrap" aria-label={`Portrait of ${siteConfig.name}`}>
-            {siteConfig.profileImage ? (
-              <Image
-                className="portrait"
-                src={siteConfig.profileImage}
-                alt={`Portrait of ${siteConfig.name}`}
-                fill
-                priority
-                unoptimized
-                sizes="(max-width: 760px) 88vw, 40vw"
-              />
-            ) : null}
+            <Image
+              className="portrait"
+              src={siteConfig.profileImage}
+              alt={`Portrait of ${siteConfig.name}`}
+              fill
+              priority
+              unoptimized
+              sizes="(max-width: 760px) 88vw, 40vw"
+            />
           </div>
         </div>
       </section>

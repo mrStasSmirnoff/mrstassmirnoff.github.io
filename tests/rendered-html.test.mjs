@@ -59,3 +59,13 @@ test("server-renders the Markdown blog index", async () => {
   assert.match(html, /From notebook to decision system/);
   assert.match(html, /What I want from an experiment review/);
 });
+
+test("server-renders a Markdown blog post", async () => {
+  const response = await render("/blog/from-notebook-to-decision-system");
+  const html = await response.text();
+
+  assert.equal(response.status, 200);
+  assert.match(html, /From notebook to decision system/);
+  assert.match(html, /A useful distinction/);
+  assert.match(html, /Name the decision before choosing the model/);
+});
