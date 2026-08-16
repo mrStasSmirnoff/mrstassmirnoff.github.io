@@ -13,8 +13,8 @@ export default function Home() {
       <section className="hero">
         <div className="container hero-grid">
           <div className="hero-copy">
-            <p className="eyebrow">{siteConfig.role} · {siteConfig.location}</p>
-            <h1>{siteConfig.headline}</h1>
+            <h1 className="hero-name">{siteConfig.name}</h1>
+            <p className="hero-role">{siteConfig.role} · {siteConfig.location}</p>
             <p className="hero-intro">{siteConfig.intro}</p>
             <div className="button-row">
               <Link className="button button-primary" href="/contact">Let&apos;s talk</Link>
@@ -29,27 +29,31 @@ export default function Home() {
                 alt={`Portrait of ${siteConfig.name}`}
                 fill
                 priority
+                unoptimized
                 sizes="(max-width: 760px) 88vw, 40vw"
               />
-            ) : (
-              <div className="portrait-placeholder">
-                <span>{siteConfig.initials}</span>
-                <small>Add public/profile.jpeg</small>
-              </div>
-            )}
-            <div className="portrait-note">
-              <strong>Data, decisions, delivery.</strong>
-              <span>From first question to measurable outcome.</span>
-            </div>
+            ) : null}
           </div>
         </div>
       </section>
 
-      <section className="expertise-strip" aria-label="Areas of expertise">
-        <div className="container expertise-list">
-          {expertise.map((item, index) => (
-            <span key={item}><b>0{index + 1}</b>{item}</span>
-          ))}
+      <section className="expertise-section" aria-labelledby="expertise-heading">
+        <div className="container">
+          <div className="expertise-heading">
+            <p className="eyebrow">The work</p>
+            <h2 id="expertise-heading">Data science, from question to outcome.</h2>
+          </div>
+          <ul className="expertise-list">
+            {expertise.map((item) => (
+              <li key={item.title}>
+                <span className="expertise-mark" aria-hidden="true">{item.shortName}</span>
+                <div>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
@@ -58,7 +62,6 @@ export default function Home() {
           <div className="section-heading">
             <p className="eyebrow">Trusted perspective</p>
             <h2>What colleagues say</h2>
-            <p>Short, specific recommendations carry more weight than a long list of claims.</p>
           </div>
           <div className="testimonial-grid">
             {testimonials.map((testimonial) => (
@@ -82,7 +85,7 @@ export default function Home() {
         <div className="container">
           <div className="section-heading section-heading-row">
             <div>
-              <p className="eyebrow">Notes from the work</p>
+              <p className="eyebrow">Stuff that interests me</p>
               <h2>From the blog</h2>
             </div>
             <Link className="text-link" href="/blog">View all posts <span>→</span></Link>

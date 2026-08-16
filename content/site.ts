@@ -1,22 +1,40 @@
 export const siteConfig = {
   name: "Stanislav Smirnov",
-  initials: "SS",
   role: "Lead Data Scientist",
-  headline: "I turn ambiguous questions into decision systems people can trust.",
   intro:
     "I combine applied machine learning, experimentation, and product thinking to make complex decisions clearer—and useful in the real world.",
-  location: "Berlin, Germany",
+  location: "Cologne, Germany",
   email: "mr.stassmirnoff@hotmail.com",
   github: "https://github.com/mrStasSmirnoff",
-  linkedIn: "https://www.linkedin.com/",
-  profileImage: null as string | null,
-  resumeAvailable: false,
+  linkedIn: "https://www.linkedin.com/in/smirnov-stanislav/",
+  profileImage: "/title-page-photo-2.JPG",
+  resumeAvailable: true,
   resumePath: "/resume.pdf",
 };
 
 export const expertise = [
-  "Applied machine learning",
-  "Experimentation & causal thinking",
-  "Data product strategy",
-  "Technical leadership",
+  {
+    shortName: "ML",
+    title: "Applied machine learning",
+    description:
+      "Models that start with a real decision and end with something people can use.",
+  },
+  {
+    shortName: "EX",
+    title: "Experimentation & causal thinking",
+    description:
+      "Experiments and analyses designed to separate movement from meaningful impact.",
+  },
+  {
+    shortName: "DP",
+    title: "Data product strategy",
+    description:
+      "Clear priorities that connect data capabilities with customer and business value.",
+  },
+  {
+    shortName: "TL",
+    title: "Technical leadership",
+    description:
+      "Pragmatic direction, explicit trade-offs, and standards a team can work with.",
+  },
 ];
