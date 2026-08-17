@@ -60,9 +60,25 @@ npm run lint
 1. Edit your name, role, links, image path, and CV path in `content/site.ts`.
 2. Replace `public/title-page-photo-2.JPG` to update the portrait without changing code.
 3. Replace `public/resume.pdf` to update the CV without changing code.
-4. Replace the sample objects in `content/testimonials.ts` with LinkedIn recommendations. Photos are optional; add them under `public/testimonials/` and set `image` on the relevant object.
+4. Replace the sample objects in `content/testimonials.ts` with LinkedIn recommendations.
 5. Edit questions in `content/faqs.ts`.
 6. Replace or remove the starter posts in `content/blog/`.
+
+## Add a testimonial
+
+Download the portrait instead of linking directly to LinkedIn; LinkedIn image URLs can expire. Crop it to a square, save it under `public/testimonials/`, and add its public URL to the matching object in `content/testimonials.ts`:
+
+```ts
+{
+  quote: "The recommendation text.",
+  name: "Jane Doe",
+  title: "Director of Data, Example Company",
+  initials: "JD",
+  image: "/testimonials/jane-doe.jpg",
+}
+```
+
+Use a descriptive lowercase filename and get the author’s permission before publishing their portrait and recommendation. If `image` is omitted, the page displays `initials` instead.
 
 ## Add a blog post
 
@@ -80,6 +96,24 @@ Write the article here.
 ```
 
 The filename becomes the URL: `my-post.md` is available at `/blog/my-post`.
+
+No code registration is needed. Files directly inside `content/blog/` are discovered automatically and sorted by the `date` field. The three newest posts also appear on the homepage.
+
+Keep Markdown files directly in `content/blog/`. For a post with images, create a matching asset folder under `public/blog/`:
+
+```text
+content/blog/payment-retries.md
+public/blog/payment-retries/funnel.png
+public/blog/payment-retries/model-results.jpg
+```
+
+Reference those files with an absolute public path and useful alternative text:
+
+```md
+![Retry funnel by outcome](/blog/payment-retries/funnel.png)
+```
+
+This keeps editable text separate from browser assets and avoids adding special image-import code.
 
 ## Working with Codex
 

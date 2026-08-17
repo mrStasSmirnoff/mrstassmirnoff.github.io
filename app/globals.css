@@ -154,6 +154,7 @@ h2 { margin-bottom: 16px; font-size: clamp(2.25rem, 4vw, 3.65rem); font-weight: 
 .prose { color: #293149; font-family: var(--font-serif), Georgia, serif; font-size: 19px; line-height: 1.82; }
 .prose h2 { margin: 55px 0 18px; font-size: 34px; }
 .prose p, .prose ul, .prose ol { margin-bottom: 24px; }
+.prose img { margin: 32px 0; border-radius: 12px; }
 .prose strong { color: var(--ink); }
 .prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
 .prose code { border-radius: 4px; padding: 2px 6px; background: var(--cream); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .9em; }

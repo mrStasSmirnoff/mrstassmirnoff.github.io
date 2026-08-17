@@ -14,7 +14,7 @@ export default function Home() {
         <div className="container hero-grid">
           <div>
             <h1 className="hero-name">{siteConfig.name}</h1>
-            <p className="hero-role">{siteConfig.role} · {siteConfig.location}</p>
+            <p className="hero-role">{siteConfig.role}, {siteConfig.location}</p>
             <p className="hero-intro">{siteConfig.intro}</p>
             <div className="button-row">
               <Link className="button button-primary" href="/contact">Let&apos;s talk</Link>

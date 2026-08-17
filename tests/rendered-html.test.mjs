@@ -17,9 +17,11 @@ test("server-renders the personal home page", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   const html = await response.text();
+  const normalizedHtml = html.replaceAll("<!-- -->", "");
 
   assert.match(html, /Stanislav Smirnov/);
   assert.match(html, /Lead Data Scientist/);
+  assert.match(normalizedHtml, /Lead Data Scientist, Cologne, Germany/);
   assert.match(html, /Cologne, Germany/);
   assert.match(html, /title-page-photo-2\.JPG/);
   assert.match(html, /Data science, from question to outcome\./);

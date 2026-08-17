@@ -7,7 +7,8 @@ export type Testimonial = {
 };
 
 // Replace these examples with recommendations copied from LinkedIn.
-// Add or remove an object; the Home page updates automatically.
+// Store optional portraits in public/testimonials and use a URL such as
+// image: "/testimonials/jane-doe.jpg". The Home page updates automatically.
 export const testimonials: Testimonial[] = [
   {
     quote:
