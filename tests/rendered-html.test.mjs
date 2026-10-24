@@ -21,6 +21,17 @@ test("exports the home page with four recommendations and their portraits", () =
   assert.doesNotMatch(html, /Recommender name|Paste a concise LinkedIn recommendation/);
 });
 
+test("recommendations have collapsed previews and retain their full text without JavaScript", () => {
+  const html = readPage("index.html");
+
+  assert.match(html, /aria-roledescription="carousel"/);
+  assert.equal((html.match(/<details class="testimonial-quote">/g) ?? []).length, 4);
+  assert.equal((html.match(/class="testimonial-excerpt"/g) ?? []).length, 4);
+  assert.equal((html.match(/class="testimonial-more">Read more<\/span>/g) ?? []).length, 4);
+  assert.match(html, /my first recommendation is to quickly extend him an offer/);
+  assert.match(html, /36% relative uplift in recovery rates/);
+});
+
 test("exports the CV preview, original PDF, and correct contact link", () => {
   assert.ok(readPage("resume/index.html").includes(`data="${basePath}/resume.pdf"`));
   assert.ok(readFileSync(path.join(output, "resume.pdf")).subarray(0, 5).equals(Buffer.from("%PDF-")));

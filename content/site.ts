@@ -6,7 +6,7 @@ export const siteConfig = {
   name: "Stanislav Smirnov",
   role: "Lead Data Scientist",
   intro:
-    "I combine applied machine learning, experimentation, and product thinking to make complex decisions clearer—and useful in the real world.",
+    "I combine applied machine learning, experimentation, and product thinking to make complex decisions clearer - and useful in the real world.",
   location: "Cologne, Germany",
   email: "mr.stassmirnoff@hotmail.com",
   github: "https://github.com/mrStasSmirnoff",
