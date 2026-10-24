@@ -1,4 +1,7 @@
+import { readdirSync, readFileSync } from "node:fs";
+import path from "node:path";
 import { marked } from "marked";
+import { publicPath } from "./urls";
 
 export type Post = {
   slug: string;
@@ -8,12 +11,6 @@ export type Post = {
   tags: string[];
   content: string;
 };
-
-const markdownFiles = import.meta.glob<string>("../content/blog/*.md", {
-  query: "?raw",
-  import: "default",
-  eager: true,
-});
 
 function parsePost(path: string, source: string): Post {
   const match = source.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
@@ -56,13 +53,18 @@ function parsePost(path: string, source: string): Post {
   };
 }
 
-// Markdown files are imported eagerly at build time, so parse and sort them once.
-const posts = Object.entries(markdownFiles)
-  .map(([path, source]) => parsePost(path, source))
-  .sort((a, b) => b.date.localeCompare(a.date));
-
 export function getPosts(): Post[] {
-  return posts;
+  // Like pathlib in Python: read local files on the server, never in the browser.
+  // Fresh reads make Markdown edits visible on refresh in development. Production
+  // runs this during the static build, so visitors never cause filesystem reads.
+  const blogDirectory = path.join(process.cwd(), "content", "blog");
+  return readdirSync(blogDirectory)
+    .filter((filename) => filename.endsWith(".md"))
+    .map((filename) => {
+      const filepath = path.join(blogDirectory, filename);
+      return parsePost(filepath, readFileSync(filepath, "utf8"));
+    })
+    .sort((a, b) => b.date.localeCompare(a.date));
 }
 
 export function getPost(slug: string): Post | undefined {
@@ -70,7 +72,15 @@ export function getPost(slug: string): Post | undefined {
 }
 
 export function renderMarkdown(content: string): string {
-  return marked.parse(content, { async: false }) as string;
+  // Keep author-written /blog/... links portable between root and project sites.
+  return marked.parse(content, {
+    async: false,
+    walkTokens(token) {
+      if ((token.type === "image" || token.type === "link") && token.href.startsWith("/") && !token.href.startsWith("//")) {
+        token.href = publicPath(token.href);
+      }
+    },
+  }) as string;
 }
 
 export function formatDate(date: string): string {

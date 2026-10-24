@@ -1,5 +1,8 @@
+import { siteUrl } from "@/lib/urls";
+
 // Personal details and homepage expertise live here; components only render them.
 export const siteConfig = {
+  url: siteUrl,
   name: "Stanislav Smirnov",
   role: "Lead Data Scientist",
   intro:

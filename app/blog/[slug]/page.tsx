@@ -5,13 +5,21 @@ import { formatDate, getPost, getPosts, renderMarkdown } from "@/lib/posts";
 
 type BlogPostPageProps = { params: Promise<{ slug: string }> };
 
+// Every public post is generated during the build; unknown slugs stay 404s.
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return getPosts().map((post) => ({ slug: post.slug }));
 }
 
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
   const post = getPost((await params).slug);
-  return post ? { title: post.title, description: post.description } : {};
+  return post ? {
+    title: post.title,
+    description: post.description,
+    openGraph: { type: "article", title: post.title, description: post.description, images: [] },
+    twitter: { card: "summary", title: post.title, description: post.description, images: [] },
+  } : {};
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {

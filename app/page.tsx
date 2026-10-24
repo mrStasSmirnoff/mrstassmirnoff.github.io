@@ -4,6 +4,7 @@ import { faqs } from "@/content/faqs";
 import { expertise, siteConfig } from "@/content/site";
 import { testimonials } from "@/content/testimonials";
 import { formatDate, getPosts } from "@/lib/posts";
+import { publicPath } from "@/lib/urls";
 
 export default function Home() {
   const recentPosts = getPosts().slice(0, 3);
@@ -24,7 +25,7 @@ export default function Home() {
           <div className="portrait-wrap" aria-label={`Portrait of ${siteConfig.name}`}>
             <Image
               className="portrait"
-              src={siteConfig.profileImage}
+              src={publicPath(siteConfig.profileImage)}
               alt={`Portrait of ${siteConfig.name}`}
               fill
               priority
@@ -64,10 +65,12 @@ export default function Home() {
           <div className="testimonial-grid">
             {testimonials.map((testimonial) => (
               <figure className="testimonial-card" key={testimonial.name}>
-                <blockquote>“{testimonial.quote}”</blockquote>
+                <blockquote>
+                  {testimonial.quote.split("\n\n").map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                </blockquote>
                 <figcaption>
                   {testimonial.image ? (
-                    <Image src={testimonial.image} alt="" width={52} height={52} />
+                    <Image src={publicPath(testimonial.image)} alt="" width={52} height={52} />
                   ) : (
                     <span className="avatar" aria-hidden="true">{testimonial.initials}</span>
                   )}

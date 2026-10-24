@@ -6,19 +6,29 @@
 /out/
 /dist/
 /.wrangler/
+/.local/
+/.openai/
+/.codex/
+/.aws/
+/.ssh/
+/AGENTS.md
 /outputs/
 /work/
 
 # Local configuration and logs
 .env*
-!.env.example
 *.pem
+*.key
+*.p12
+*.pfx
+.npmrc
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 .vercel/
 next-env.d.ts
+*.tsbuildinfo
 
 # Editor and OS files
 .DS_Store

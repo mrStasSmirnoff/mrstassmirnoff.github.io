@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { siteConfig } from "@/content/site";
+import { publicPath } from "@/lib/urls";
 
 export const metadata: Metadata = {
   title: "Resume",
@@ -15,12 +16,12 @@ export default function ResumePage() {
           <h1>Resume</h1>
           <p>A concise view of the work, responsibilities, and outcomes behind the title.</p>
         </div>
-        <a className="button button-primary" href={siteConfig.resumePath} download>Download PDF</a>
+        <a className="button button-primary" href={publicPath(siteConfig.resumePath)} download>Download PDF</a>
       </section>
 
       <section className="container resume-shell">
-        <object data={siteConfig.resumePath} type="application/pdf" aria-label={`${siteConfig.name}'s resume`}>
-          <p>Your browser cannot preview this PDF. <a href={siteConfig.resumePath}>Download it instead.</a></p>
+        <object data={publicPath(siteConfig.resumePath)} type="application/pdf" aria-label={`${siteConfig.name}'s resume`}>
+          <p>Your browser cannot preview this PDF. <a href={publicPath(siteConfig.resumePath)}>Download it instead.</a></p>
         </object>
       </section>
     </main>
