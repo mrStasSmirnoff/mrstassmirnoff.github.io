@@ -64,7 +64,9 @@ export default function Home() {
           <div className="testimonial-grid">
             {testimonials.map((testimonial) => (
               <figure className="testimonial-card" key={testimonial.name}>
-                <blockquote>“{testimonial.quote}”</blockquote>
+                <blockquote>
+                  {testimonial.quote.split("\n\n").map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                </blockquote>
                 <figcaption>
                   {testimonial.image ? (
                     <Image src={testimonial.image} alt="" width={52} height={52} />
