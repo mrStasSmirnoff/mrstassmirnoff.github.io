@@ -1,47 +1,42 @@
 ---
-title: "A/B testing: is the model worth shipping?"
+title: "Notes on significance thresholds, statistical power, and interpreting A/B tests for payment models"
 date: "2026-10-24"
-description: "A return to experiment design, effect sizes, and the question that matters for production ML: is the improvement worth shipping?"
+description: "How I interpret significance levels, power, and confidence intervals when testing payment models."
 tags: ["Experimentation", "Machine learning", "Payments"]
 ---
 
-Once in a while, it is worth going back to basics. I recently revisited three old Netflix posts on A/B testing: still good, accessible reads.
+I recently reread three Netflix posts on A/B testing. They’re still good, accessible reads. The parts about significance thresholds and statistical power were worth revisiting.
 
-For production ML, the real question is rarely just “is this statistically significant?” It is usually closer to “is the improvement real enough, and large enough, to ship?”
+Consider two models that predict whether a payment service provider (PSP) will authorise a payment. Model B has better offline metrics than model A. I’d want to test it online before deploying it, because we still need to measure its effect on payment outcomes.
 
-## From offline metrics to an online decision
+The online test needs a metric such as authorisation rate or recovered revenue, with guardrails for outcomes we don’t want to worsen. Four statistical concepts help me interpret the result:
 
-Say candidate model B looks better than model A on offline metrics for predicting whether a payment will be authorised by the payment service provider (PSP). That is enough to justify an online test, but not enough to justify deployment.
+- **Significance level (α):** the false-positive rate allowed by the test, assuming its statistical assumptions hold.
+- **P-value:** how surprising a result at least as extreme as the observed one would be under the null hypothesis of no difference. It isn’t the probability that the null hypothesis is true.
+- **Confidence interval:** the range of effect sizes compatible with the data under the analysis assumptions. A wider interval means more uncertainty.
+- **Statistical power:** the probability of detecting a specified effect if it exists. It depends on the effect size, sample size, variability, and significance level.
 
-In the online test, the question shifts to the outcome that matters in production: authorisation rate, recovered revenue, or false declines. This is where the basics matter again:
+## Choosing a significance level
 
-- **Significance level (α)** sets the false-positive rate we accept for the test, assuming its statistical assumptions hold.
-- **The p-value** tells us how surprising a result at least as extreme as the observed one would be under the null hypothesis of no difference. It is not the probability that the null hypothesis is true.
-- **A confidence interval** shows the effect sizes compatible with the data under the analysis assumptions. Wider intervals mean more uncertainty.
-- **Statistical power** is the chance of detecting a specified effect if that effect is real. It depends on the effect size, sample size, variability, and significance level.
+The reminder I found most useful was about **α = 0.05**. It’s a common threshold, but we should choose it for the experiment rather than carry it over automatically.
 
-## Five per cent is a choice
+Under the null hypothesis and the test’s assumptions, this threshold limits false positives to five per cent over repeated experiments. It doesn’t mean there is a five per cent probability that a particular positive finding is wrong.
 
-The most useful reminder for me was that **α = 0.05 is not magic**. It is a choice about how often our test would declare an improvement over repeated experiments where there is actually no difference. It is not a five per cent chance that any particular winning model is a false positive.
+Lowering α usually requires more data to maintain the same power for a given effect size. That trade-off matters when both errors are costly: deploying a model that doesn’t help, or missing an improvement that would have been useful.
 
-If we tighten that threshold, we usually need more data to maintain the same power for a given effect size. For ML systems, both kinds of mistake can be costly:
+## Reading the result
 
-- Shipping a model that does not improve outcomes.
-- Rejecting a model that would have improved them.
+I look at the estimated effect and confidence interval alongside the p-value. A small, statistically significant lift may not cover the cost of running and maintaining the model.
 
-## Read the effect size and its uncertainty
+A non-significant result with a wide interval can leave a useful gain and a harmful loss unresolved. It doesn’t show that the models are equivalent. We may simply need more precision to make the decision. This was the point I most needed to remind myself of.
 
-I find it more useful to read A/B tests through the effect size and confidence interval, alongside the p-value.
+Before running the test, it helps to agree on the minimum improvement that would justify deployment and the guardrails we’ll use. Then we can judge the result against those criteria rather than decide what counts as useful after seeing the numbers.
 
-A tiny but statistically significant lift may still be irrelevant operationally. A non-significant result with a wide interval may leave both a useful gain and a harmful loss unresolved. It does not establish that the models are equivalent; the test may simply lack the precision needed for the decision. This is probably the part I most needed to remind myself of.
+## The classification analogy
 
-The practical question is whether the estimated improvement and its uncertainty justify shipping, given the costs, guardrails, and minimum improvement that would matter to the business.
+I also find the comparison with binary classification helpful. If we treat detecting an improvement as a positive prediction, α resembles a tolerated false-positive rate, and power resembles recall for improvements of a particular size.
 
-## A classification analogy
-
-One more connection I find useful: there is a rough analogy between A/B testing and binary classification. The experiment also feeds a decision rule: ship or do not ship.
-
-In that view, α behaves a little like a tolerated false-positive rate, while power resembles recall for improvements of a particular size. I would not push the analogy too far. A statistically significant result alone is not a complete shipping rule, and power changes with the effect size. Still, it helps me think about the trade-offs when designing an experiment.
+The comparison has limits. Power changes with the effect size, and statistical significance alone doesn’t tell us whether to ship. It helps me weigh the two kinds of error when planning a test.
 
 ## Further reading
 

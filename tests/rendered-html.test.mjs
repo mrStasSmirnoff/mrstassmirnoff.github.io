@@ -14,6 +14,8 @@ test("exports the home page with four recommendations and their portraits", () =
 
   assert.match(html, /Lead Data Scientist, Cologne, Germany/);
   assert.equal((html.match(/class="testimonial-card"/g) ?? []).length, 4);
+  const names = [...html.matchAll(/aria-roledescription="slide" aria-label="\d+ of \d+: ([^"]+)"/g)].map((match) => match[1]);
+  assert.deepEqual(names, ["Maxime Regh", "Andreas Linn", "Shannon Kehoe", "Kcarlos"]);
   for (const filename of ["andreas-linn", "kcarlos", "maxime-regh", "shannon-kehoeai"]) {
     assert.ok(html.includes(`src="${basePath}/testimonials/${filename}.jpeg"`));
   }
@@ -21,10 +23,26 @@ test("exports the home page with four recommendations and their portraits", () =
   assert.doesNotMatch(html, /Recommender name|Paste a concise LinkedIn recommendation/);
 });
 
+test("recommendations have collapsed previews and retain their full text without JavaScript", () => {
+  const html = readPage("index.html");
+
+  assert.match(html, /aria-roledescription="carousel"/);
+  assert.equal((html.match(/<details class="testimonial-quote">/g) ?? []).length, 4);
+  assert.equal((html.match(/class="testimonial-excerpt"/g) ?? []).length, 4);
+  assert.equal((html.match(/class="testimonial-more">Read more<\/span>/g) ?? []).length, 4);
+  assert.match(html, /my first recommendation is to quickly extend him an offer/);
+  assert.match(html, /36% relative uplift in recovery rates/);
+});
+
 test("exports the CV preview, original PDF, and correct contact link", () => {
   assert.ok(readPage("resume/index.html").includes(`data="${basePath}/resume.pdf"`));
   assert.ok(readFileSync(path.join(output, "resume.pdf")).subarray(0, 5).equals(Buffer.from("%PDF-")));
   assert.match(readPage("contact/index.html"), /href="https:\/\/www\.linkedin\.com\/in\/smirnov-stanislav\/"/);
+});
+
+test("production does not enable the local Avenir preview and includes the font license", () => {
+  assert.doesNotMatch(readPage("index.html"), /data-font-preview=/);
+  assert.match(readFileSync(path.join(output, "fonts/nunito-sans-OFL.txt"), "utf8"), /SIL OPEN FONT LICENSE Version 1\.1/);
 });
 
 test("exports every Markdown post and links it from the blog index", () => {

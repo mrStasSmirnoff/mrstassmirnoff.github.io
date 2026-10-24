@@ -6,7 +6,7 @@ export const siteConfig = {
   name: "Stanislav Smirnov",
   role: "Lead Data Scientist",
   intro:
-    "I combine applied machine learning, experimentation, and product thinking to make complex decisions clearer—and useful in the real world.",
+    "I work on machine learning, experiments, and data products to help teams make decisions.",
   location: "Cologne, Germany",
   email: "mr.stassmirnoff@hotmail.com",
   github: "https://github.com/mrStasSmirnoff",
@@ -20,24 +20,24 @@ export const expertise = [
     shortName: "ML",
     title: "Applied machine learning",
     description:
-      "Models that start with a real decision and end with something people can use.",
+      "Models built for specific product and business decisions.",
   },
   {
     shortName: "EX",
     title: "Experimentation & causal thinking",
     description:
-      "Experiments and analyses designed to separate movement from meaningful impact.",
+      "Designing tests and analysing results, including uncertainty and causal assumptions.",
   },
   {
     shortName: "DP",
     title: "Data product strategy",
     description:
-      "Clear priorities that connect data capabilities with customer and business value.",
+      "Choosing which data problems to work on and defining how to measure success.",
   },
   {
     shortName: "TL",
     title: "Technical leadership",
     description:
-      "Pragmatic direction, explicit trade-offs, and standards a team can work with.",
+      "Reviewing technical work, mentoring colleagues, and helping teams choose practical approaches.",
   },
 ];

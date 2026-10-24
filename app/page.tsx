@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { TestimonialCarousel } from "@/app/_components/TestimonialCarousel";
 import { faqs } from "@/content/faqs";
 import { expertise, siteConfig } from "@/content/site";
 import { testimonials } from "@/content/testimonials";
@@ -40,7 +41,7 @@ export default function Home() {
         <div className="container">
           <div className="expertise-heading">
             <p className="eyebrow">The work</p>
-            <h2 id="expertise-heading">Data science, from question to outcome.</h2>
+            <h2 id="expertise-heading">What I work on</h2>
           </div>
           <ul className="expertise-list">
             {expertise.map((item) => (
@@ -59,15 +60,26 @@ export default function Home() {
       <section className="section testimonial-section">
         <div className="container">
           <div className="section-heading">
-            <p className="eyebrow">Trusted perspective</p>
+            <p className="eyebrow">Recommendations</p>
             <h2>What colleagues say</h2>
           </div>
-          <div className="testimonial-grid">
-            {testimonials.map((testimonial) => (
-              <figure className="testimonial-card" key={testimonial.name}>
-                <blockquote>
-                  {testimonial.quote.split("\n\n").map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-                </blockquote>
+          <TestimonialCarousel>
+            {testimonials.map((testimonial, index) => (
+              <figure className="testimonial-card" key={testimonial.name} role="group" aria-roledescription="slide" aria-label={`${index + 1} of ${testimonials.length}: ${testimonial.name}`}>
+                {/* Native details keeps expansion keyboard-accessible, even without JavaScript. */}
+                <details className="testimonial-quote">
+                  <summary>
+                    <span className="testimonial-excerpt">{testimonial.quote.split("\n\n")[0]}</span>
+                    <span className="testimonial-toggle">
+                      <span className="testimonial-more">Read more</span>
+                      <span className="testimonial-less">Read less</span>
+                      <span className="sr-only"> from {testimonial.name}</span>
+                    </span>
+                  </summary>
+                  <blockquote>
+                    {testimonial.quote.split("\n\n").map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                  </blockquote>
+                </details>
                 <figcaption>
                   {testimonial.image ? (
                     <Image src={publicPath(testimonial.image)} alt="" width={52} height={52} />
@@ -78,7 +90,7 @@ export default function Home() {
                 </figcaption>
               </figure>
             ))}
-          </div>
+          </TestimonialCarousel>
         </div>
       </section>
 
@@ -107,9 +119,8 @@ export default function Home() {
       <section className="section faq-section">
         <div className="container faq-grid">
           <div className="section-heading">
-            <p className="eyebrow">A little more context</p>
+            <p className="eyebrow">Questions</p>
             <h2>Frequently asked questions</h2>
-            <p>Useful answers before we start a conversation.</p>
           </div>
           <div className="faq-list">
             {faqs.map((faq, index) => (
@@ -125,10 +136,10 @@ export default function Home() {
       <section className="contact-band">
         <div className="container contact-band-grid">
           <div>
-            <p className="eyebrow">Have a thoughtful problem?</p>
-            <h2>Let&apos;s make the next decision clearer.</h2>
+            <p className="eyebrow">Get in touch</p>
+            <h2>Tell me what you&apos;re working on.</h2>
           </div>
-          <Link className="button button-light" href="/contact">Start a conversation</Link>
+          <Link className="button button-light" href="/contact">Contact me</Link>
         </div>
       </section>
     </main>
