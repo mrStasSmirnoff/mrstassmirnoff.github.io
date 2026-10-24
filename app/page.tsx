@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { TestimonialCarousel } from "@/app/_components/TestimonialCarousel";
 import { faqs } from "@/content/faqs";
 import { expertise, siteConfig } from "@/content/site";
 import { testimonials } from "@/content/testimonials";
@@ -62,12 +63,23 @@ export default function Home() {
             <p className="eyebrow">Trusted perspective</p>
             <h2>What colleagues say</h2>
           </div>
-          <div className="testimonial-grid">
-            {testimonials.map((testimonial) => (
-              <figure className="testimonial-card" key={testimonial.name}>
-                <blockquote>
-                  {testimonial.quote.split("\n\n").map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-                </blockquote>
+          <TestimonialCarousel>
+            {testimonials.map((testimonial, index) => (
+              <figure className="testimonial-card" key={testimonial.name} role="group" aria-roledescription="slide" aria-label={`${index + 1} of ${testimonials.length}: ${testimonial.name}`}>
+                {/* Native details keeps expansion keyboard-accessible, even without JavaScript. */}
+                <details className="testimonial-quote">
+                  <summary>
+                    <span className="testimonial-excerpt">{testimonial.quote.split("\n\n")[0]}</span>
+                    <span className="testimonial-toggle">
+                      <span className="testimonial-more">Read more</span>
+                      <span className="testimonial-less">Read less</span>
+                      <span className="sr-only"> from {testimonial.name}</span>
+                    </span>
+                  </summary>
+                  <blockquote>
+                    {testimonial.quote.split("\n\n").map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                  </blockquote>
+                </details>
                 <figcaption>
                   {testimonial.image ? (
                     <Image src={publicPath(testimonial.image)} alt="" width={52} height={52} />
@@ -78,7 +90,7 @@ export default function Home() {
                 </figcaption>
               </figure>
             ))}
-          </div>
+          </TestimonialCarousel>
         </div>
       </section>
 

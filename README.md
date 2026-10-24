@@ -20,6 +20,16 @@ npm run lint
 npm test
 ```
 
+Localhost shows the branch you currently have checked out, including uncommitted edits. To review `dev`, commit your feature changes, merge the feature into `dev`, then run:
+
+```bash
+git switch dev
+git pull --ff-only
+npm run dev
+```
+
+Stop the previous dev server with Ctrl+C before switching branches. Review at desktop and mobile widths before merging `dev` into `main`; `dev` does not publish a preview site.
+
 ## Content
 
 - `content/site.ts`: profile and professional links.
