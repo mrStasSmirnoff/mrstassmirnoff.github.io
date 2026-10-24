@@ -14,8 +14,8 @@ export default function BlogPage() {
     <main className="page-main">
       <section className="page-hero container narrow">
         <p className="eyebrow">Writing</p>
-        <h1>Ideas worth making inspectable.</h1>
-        <p>Notes on data products, experiments, technical leadership, and the decisions behind the work.</p>
+        <h1>Blog</h1>
+        <p>Notes on data science, experimentation, and technical leadership.</p>
       </section>
       <section className="container narrow post-list" aria-label="Blog posts">
         {posts.map((post) => (

@@ -14,6 +14,8 @@ test("exports the home page with four recommendations and their portraits", () =
 
   assert.match(html, /Lead Data Scientist, Cologne, Germany/);
   assert.equal((html.match(/class="testimonial-card"/g) ?? []).length, 4);
+  const names = [...html.matchAll(/aria-roledescription="slide" aria-label="\d+ of \d+: ([^"]+)"/g)].map((match) => match[1]);
+  assert.deepEqual(names, ["Maxime Regh", "Andreas Linn", "Shannon Kehoe", "Kcarlos"]);
   for (const filename of ["andreas-linn", "kcarlos", "maxime-regh", "shannon-kehoeai"]) {
     assert.ok(html.includes(`src="${basePath}/testimonials/${filename}.jpeg"`));
   }
@@ -36,6 +38,11 @@ test("exports the CV preview, original PDF, and correct contact link", () => {
   assert.ok(readPage("resume/index.html").includes(`data="${basePath}/resume.pdf"`));
   assert.ok(readFileSync(path.join(output, "resume.pdf")).subarray(0, 5).equals(Buffer.from("%PDF-")));
   assert.match(readPage("contact/index.html"), /href="https:\/\/www\.linkedin\.com\/in\/smirnov-stanislav\/"/);
+});
+
+test("production does not enable the local Avenir preview and includes the font license", () => {
+  assert.doesNotMatch(readPage("index.html"), /data-font-preview=/);
+  assert.match(readFileSync(path.join(output, "fonts/nunito-sans-OFL.txt"), "utf8"), /SIL OPEN FONT LICENSE Version 1\.1/);
 });
 
 test("exports every Markdown post and links it from the blog index", () => {

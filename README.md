@@ -30,6 +30,16 @@ npm run dev
 
 Stop the previous dev server with Ctrl+C before switching branches. Review at desktop and mobile widths before merging `dev` into `main`; `dev` does not publish a preview site.
 
+### Font preview
+
+The site uses Nunito Sans for UI text and Lora for headings and articles. To compare with the Avenir installed on your Mac, stop the dev server and run:
+
+```bash
+FONT_PREVIEW=avenir npm run dev
+```
+
+This switch only affects development. `npm run dev` without it shows Nunito Sans, which is also used in production. No Avenir font files are distributed. Nunito Sans is covered by the [SIL Open Font License](public/fonts/nunito-sans-OFL.txt).
+
 ## Content
 
 - `content/site.ts`: profile and professional links.

@@ -12,10 +12,9 @@ export default function ContactPage() {
       <div className="container contact-grid">
         <section className="contact-copy">
           <p className="eyebrow">Contact</p>
-          <h1>Good work starts with a clear conversation.</h1>
+          <h1>Get in touch</h1>
           <p>
-            If you have a data product, decision, or team challenge that could use a fresh perspective,
-            send a short note. Context beats a polished brief.
+            Send me an email about your project or question.
           </p>
           <a className="button button-primary" href={`mailto:${siteConfig.email}`}>Email {siteConfig.name.split(" ")[0]}</a>
         </section>
@@ -29,7 +28,7 @@ export default function ContactPage() {
             <a href={siteConfig.linkedIn}>LinkedIn <span>↗</span></a>
             <a href={siteConfig.github}>GitHub <span>↗</span></a>
           </div>
-          <p className="contact-note">I usually reply within a few working days.</p>
+          <p className="contact-note">You can also contact me on LinkedIn.</p>
         </aside>
       </div>
     </main>

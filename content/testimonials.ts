@@ -10,6 +10,13 @@ export type Testimonial = {
 // paragraphs; image paths refer to the small portraits in public/testimonials/.
 export const testimonials: Testimonial[] = [
   {
+    name: "Maxime Regh",
+    title: "Senior Product Manager, Payments",
+    initials: "MR",
+    image: "/testimonials/maxime-regh.jpeg",
+    quote: `Stanislav and I didn’t sit on the same team, but we kept bumping into each other around payments and fraud. He learns the domain quickly and asks the right questions. While I was at Stripe, he drove Dynamic Retries forward; when I came back we went straight into details—signals, rollout, what to test next, and where routing or further experiments with retries make sense. He’s curious, precise, and focused on measurable lift. I’d be glad to work with him on routing or any payment optimization work.`,
+  },
+  {
     name: "Andreas Linn",
     title: "Chief Product Officer",
     initials: "AL",
@@ -23,22 +30,6 @@ Aside from Stanislav's knowledge, expertise and abilities, he is also a great te
 If you are reading this because you are a hiring expert, my first recommendation is to quickly extend him an offer.`,
   },
   {
-    name: "Kcarlos",
-    title: "Data Engineer",
-    initials: "K",
-    image: "/testimonials/kcarlos.jpeg",
-    quote: `I had the pleasure of working with Stanislav, and I can confidently say he’s one of the best data scientists I’ve collaborated with. He brings a rare balance of deep technical expertise and strong communication skills. His foundational knowledge in data analysis and machine learning is unmatched—he not only understands the theory but also knows how to apply it to solve real-world problems effectively.
-
-What stood out most was his ability to work as a true team player. He always made complex concepts accessible to both technical and non-technical stakeholders, which helped drive alignment and impact across the team. Anyone looking for a data scientist who can bridge the gap between advanced analytics and business outcomes would be lucky to have Stanislav on their team.`,
-  },
-  {
-    name: "Maxime Regh",
-    title: "Senior Product Manager, Payments",
-    initials: "MR",
-    image: "/testimonials/maxime-regh.jpeg",
-    quote: `Stanislav and I didn’t sit on the same team, but we kept bumping into each other around payments and fraud. He learns the domain quickly and asks the right questions. While I was at Stripe, he drove Dynamic Retries forward; when I came back we went straight into details—signals, rollout, what to test next, and where routing or further experiments with retries make sense. He’s curious, precise, and focused on measurable lift. I’d be glad to work with him on routing or any payment optimization work.`,
-  },
-  {
     name: "Shannon Kehoe",
     title: "Director of Artificial Intelligence",
     initials: "SK",
@@ -50,5 +41,14 @@ His work on Dynamic Retries wasn’t just about modeling—it was about end-to-e
 But what truly set Stanislav apart—and why I promoted him to Senior Data Scientist—was how he consistently elevated those around him. He mentored junior team members with patience and clarity, brought stakeholders along with him through collaborative decision-making, and never lost sight of the business context behind the data.
 
 If you’re looking for someone who can take ambiguous problems, shape them into product-ready solutions, and deliver measurable business outcomes—all while strengthening the team around him—I can’t recommend Stanislav highly enough.`,
+  },
+  {
+    name: "Kcarlos",
+    title: "Data Engineer",
+    initials: "K",
+    image: "/testimonials/kcarlos.jpeg",
+    quote: `I had the pleasure of working with Stanislav, and I can confidently say he’s one of the best data scientists I’ve collaborated with. He brings a rare balance of deep technical expertise and strong communication skills. His foundational knowledge in data analysis and machine learning is unmatched—he not only understands the theory but also knows how to apply it to solve real-world problems effectively.
+
+What stood out most was his ability to work as a true team player. He always made complex concepts accessible to both technical and non-technical stakeholders, which helped drive alignment and impact across the team. Anyone looking for a data scientist who can bridge the gap between advanced analytics and business outcomes would be lucky to have Stanislav on their team.`,
   },
 ];

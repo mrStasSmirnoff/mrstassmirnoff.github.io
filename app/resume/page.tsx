@@ -14,7 +14,7 @@ export default function ResumePage() {
         <div>
           <p className="eyebrow">Experience</p>
           <h1>Resume</h1>
-          <p>A concise view of the work, responsibilities, and outcomes behind the title.</p>
+          <p>Read my CV below, or download the PDF.</p>
         </div>
         <a className="button button-primary" href={publicPath(siteConfig.resumePath)} download>Download PDF</a>
       </section>
