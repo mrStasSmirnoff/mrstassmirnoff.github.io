@@ -21,6 +21,7 @@ ul, ol { list-style: none; }
 img { display: block; max-width: 100%; height: auto; }
 
 body {
+  --font-sans: var(--font-nunito);
   margin: 0;
   background: var(--paper);
   color: var(--ink);
@@ -31,6 +32,9 @@ body {
 }
 
 a { color: inherit; text-decoration: none; }
+
+/* Local comparison only: requires Avenir to be installed on the viewing device. */
+body[data-font-preview="avenir"] { --font-sans: "Avenir", "Avenir Next", var(--font-nunito); }
 
 button, a { -webkit-tap-highlight-color: transparent; }
 
@@ -162,10 +166,10 @@ h2 { margin-bottom: 16px; font-size: clamp(2.25rem, 4vw, 3.65rem); font-weight: 
 .article-shell { width: min(760px, calc(100% - 48px)); }
 .back-link { display: inline-block; margin-bottom: 50px; color: var(--accent); font-size: 14px; font-weight: 700; }
 .article-shell header { margin-bottom: 58px; padding-bottom: 45px; border-bottom: 1px solid var(--line); }
-.article-shell header h1 { font-size: clamp(3rem, 7vw, 5rem); }
+.article-shell header h1 { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.15; }
 .article-shell header > p:last-child { color: var(--muted); font-size: 20px; }
 .prose { color: #293149; font-family: var(--font-serif), Georgia, serif; font-size: 19px; line-height: 1.82; }
-.prose h2 { margin: 55px 0 18px; font-size: 34px; }
+.prose h2 { margin: 55px 0 18px; font-size: clamp(1.5rem, 3vw, 2rem); }
 .prose p, .prose ul, .prose ol { margin-bottom: 24px; }
 .prose ul { list-style: disc; padding-left: 1.4em; }
 .prose ol { list-style: decimal; padding-left: 1.4em; }

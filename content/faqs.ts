@@ -2,17 +2,17 @@ export const faqs = [
   {
     question: "What kind of problems do you work on?",
     answer:
-      "Product and business decisions where data, machine learning, and sound experimentation can create a measurable advantage.",
+      "Product and business problems involving machine learning, payment performance, or experimentation.",
   },
   {
     question: "Are you hands-on or mainly a leader?",
     answer:
-      "Both. I enjoy setting technical direction and coaching teams, while staying close enough to the data and code to make good trade-offs.",
+      "Both. I set technical direction and mentor colleagues, and I also work with data and code.",
   },
   {
     question: "What do you write about?",
     answer:
-      "Applied data science, decision-making under uncertainty, experiments, and the practical work of turning models into products.",
+      "Applied data science, experiments, and the decisions involved in using models in a product.",
   },
   {
     question: "What languages do you speak?",
@@ -22,6 +22,6 @@ export const faqs = [
   {
     question: "What is the best way to get in touch?",
     answer:
-      "Email is best. A short note with the context, problem, and desired outcome is more than enough to start a useful conversation.",
+      "Email is best. Tell me what you’re working on and what you’d like to discuss.",
   },
 ];
