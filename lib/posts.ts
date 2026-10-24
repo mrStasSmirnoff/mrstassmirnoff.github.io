@@ -1,6 +1,7 @@
 import { readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { marked } from "marked";
+import { publicPath } from "./urls";
 
 export type Post = {
   slug: string;
@@ -71,7 +72,15 @@ export function getPost(slug: string): Post | undefined {
 }
 
 export function renderMarkdown(content: string): string {
-  return marked.parse(content, { async: false }) as string;
+  // Keep author-written /blog/... links portable between root and project sites.
+  return marked.parse(content, {
+    async: false,
+    walkTokens(token) {
+      if ((token.type === "image" || token.type === "link") && token.href.startsWith("/") && !token.href.startsWith("//")) {
+        token.href = publicPath(token.href);
+      }
+    },
+  }) as string;
 }
 
 export function formatDate(date: string): string {

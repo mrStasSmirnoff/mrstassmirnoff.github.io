@@ -7,6 +7,7 @@ import "./globals.css";
 
 const geist = Geist({ variable: "--font-sans", subsets: ["latin"] });
 const lora = Lora({ variable: "--font-serif", subsets: ["latin"] });
+const socialImage = `${siteConfig.url}/og.png`;
 
 // Static hosting has no incoming request: share links use the public site URL.
 export const metadata: Metadata = {
@@ -17,9 +18,9 @@ export const metadata: Metadata = {
     type: "website",
     title: `${siteConfig.name} · ${siteConfig.role}`,
     description: siteConfig.intro,
-    images: [{ url: "/og.png", width: 1732, height: 909, alt: `${siteConfig.name}, ${siteConfig.role}` }],
+    images: [{ url: socialImage, width: 1732, height: 909, alt: `${siteConfig.name}, ${siteConfig.role}` }],
   },
-  twitter: { card: "summary_large_image", images: ["/og.png"] },
+  twitter: { card: "summary_large_image", images: [socialImage] },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

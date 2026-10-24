@@ -1,4 +1,4 @@
-name: Site checks and publication
+name: CI/CD
 
 on:
   push:
@@ -9,6 +9,7 @@ on:
 
 permissions:
   contents: read
+  pages: read
 
 concurrency:
   group: site-${{ github.ref }}
@@ -16,7 +17,6 @@ concurrency:
 
 jobs:
   checks:
-    name: Build, lint, and test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -24,17 +24,20 @@ jobs:
         with:
           node-version: 22
           cache: npm
+      - uses: actions/configure-pages@v6
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        id: pages
       - run: npm ci
       - run: npm run lint
       - run: npm test
-      # dev and pull requests only run checks; they never upload a website.
+        env:
+          SITE_URL: ${{ steps.pages.outputs.base_url }}
       - uses: actions/upload-pages-artifact@v5
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         with:
           path: out
 
   publish:
-    name: Publish main to GitHub Pages
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     needs: checks
     runs-on: ubuntu-latest
@@ -43,9 +46,7 @@ jobs:
       id-token: write
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.deploy.outputs.page_url }}
     steps:
-      - uses: actions/configure-pages@v6
-      - name: Deploy
-        id: deployment
-        uses: actions/deploy-pages@v5
+      - uses: actions/deploy-pages@v5
+        id: deploy
