@@ -10,13 +10,6 @@ export type Testimonial = {
 // paragraphs; image paths refer to the small portraits in public/testimonials/.
 export const testimonials: Testimonial[] = [
   {
-    name: "Maxime Regh",
-    title: "Senior Product Manager, Payments",
-    initials: "MR",
-    image: "/testimonials/maxime-regh.jpeg",
-    quote: `Stanislav and I didn’t sit on the same team, but we kept bumping into each other around payments and fraud. He learns the domain quickly and asks the right questions. While I was at Stripe, he drove Dynamic Retries forward; when I came back we went straight into details—signals, rollout, what to test next, and where routing or further experiments with retries make sense. He’s curious, precise, and focused on measurable lift. I’d be glad to work with him on routing or any payment optimization work.`,
-  },
-  {
     name: "Andreas Linn",
     title: "Chief Product Officer",
     initials: "AL",
@@ -28,6 +21,13 @@ Even today, occasionally I wish for a colleague like Stanislav. No question, fut
 Aside from Stanislav's knowledge, expertise and abilities, he is also a great team player and he went out of his way to help others when needed.
 
 If you are reading this because you are a hiring expert, my first recommendation is to quickly extend him an offer.`,
+  },
+  {
+    name: "Maxime Regh",
+    title: "Senior Product Manager, Payments",
+    initials: "MR",
+    image: "/testimonials/maxime-regh.jpeg",
+    quote: `Stanislav and I didn’t sit on the same team, but we kept bumping into each other around payments and fraud. He learns the domain quickly and asks the right questions. While I was at Stripe, he drove Dynamic Retries forward; when I came back we went straight into details—signals, rollout, what to test next, and where routing or further experiments with retries make sense. He’s curious, precise, and focused on measurable lift. I’d be glad to work with him on routing or any payment optimization work.`,
   },
   {
     name: "Shannon Kehoe",

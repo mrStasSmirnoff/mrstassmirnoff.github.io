@@ -7,7 +7,6 @@ export const resume = {
     "Senior Data Scientist in payments. I lead ML and analytics work across authorization, routing, retries, network tokenization and fraud, from problem framing and business case through production rollout, KPI evaluation and iteration.",
   ],
   collaboration: "I work closely with Product, Engineering and Fraud Prevention and mentor junior data scientists.",
-  background: "Before payments: data engineering on Azure (Data Vault 2.0) and telecom network optimization.",
   recentWork: [
     {
       area: "Network tokenization & account updater",

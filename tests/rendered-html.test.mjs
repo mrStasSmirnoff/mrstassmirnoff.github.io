@@ -15,12 +15,24 @@ test("exports the home page with four recommendations and their portraits", () =
   assert.match(html, /Lead Data Scientist, Cologne, Germany/);
   assert.equal((html.match(/class="testimonial-card"/g) ?? []).length, 4);
   const names = [...html.matchAll(/aria-roledescription="slide" aria-label="\d+ of \d+: ([^"]+)"/g)].map((match) => match[1]);
-  assert.deepEqual(names, ["Maxime Regh", "Andreas Linn", "Shannon Kehoe", "Kcarlos"]);
+  assert.deepEqual(names, ["Andreas Linn", "Maxime Regh", "Shannon Kehoe", "Kcarlos"]);
   for (const filename of ["andreas-linn", "kcarlos", "maxime-regh", "shannon-kehoeai"]) {
     assert.ok(html.includes(`src="${basePath}/testimonials/${filename}.jpeg"`));
   }
   assert.match(html, /What languages do you speak\?/);
   assert.doesNotMatch(html, /Recommender name|Paste a concise LinkedIn recommendation/);
+});
+
+test("home hero actions link to blog, about, and contact in that order", () => {
+  const hero = readPage("index.html").match(/<section class="hero">([\s\S]*?)<\/section>/)?.[1];
+  assert.ok(hero);
+  const actions = [...hero.matchAll(/<a class="button [^"]+" href="([^"]+)">([^<]+)<\/a>/g)]
+    .map(([, href, label]) => [href, label.replaceAll("&#x27;", "'")]);
+  assert.deepEqual(actions, [
+    [`${basePath}/blog/`, "Read the blog"],
+    [`${basePath}/resume/`, "About me"],
+    [`${basePath}/contact/`, "Let's talk"],
+  ]);
 });
 
 test("recommendations have collapsed previews and retain their full text without JavaScript", () => {
@@ -41,7 +53,9 @@ test("exports a readable Resume page, links it from navigation, and keeps the PD
   assert.match(html, /Senior Data Scientist, Payments/);
   assert.match(html, /available upon request/);
   assert.match(html, /mailto:mr\.stassmirnoff@hotmail\.com\?subject=Detailed%20CV%20request/);
-  assert.match(html, /Merchant of Record \(MoR\) platform handling dozens of millions/);
+  assert.match(html, /Senior Data Scientist in payments\. I lead ML and analytics work/);
+  assert.match(html, /What I&#x27;ve been focusing on recently/);
+  assert.doesNotMatch(html, /Before payments:|resume-background/);
   assert.equal((html.match(/class="resume-work-item"/g) ?? []).length, 4);
   assert.match(html, /matched the PSP’s figures within 0\.01 pp and corrected for merchant mix/);
   assert.match(html, /offline recall from ~44% to ~72% at the same 1% false-positive rate budget/);

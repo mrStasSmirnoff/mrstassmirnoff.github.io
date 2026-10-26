@@ -25,18 +25,18 @@ export const expertise = [
     shortName: "EX",
     title: "Experimentation & causal thinking",
     description:
-      "Designing tests and analysing results, including uncertainty and causal assumptions.",
+      "Reducing entropy through test design and results analysis.",
   },
   {
     shortName: "DP",
     title: "Data product strategy",
     description:
-      "Choosing which data problems to work on and defining how to measure success.",
+      "Finding high-value use cases and defining how to measure success.",
   },
   {
     shortName: "TL",
     title: "Technical leadership",
     description:
-      "Reviewing technical work, mentoring colleagues, and helping teams choose practical approaches.",
+      "Designing systems, mentoring colleagues and sharing knowledge.",
   },
 ];

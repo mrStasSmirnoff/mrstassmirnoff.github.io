@@ -30,7 +30,7 @@ export default function ResumePage() {
         </section>
 
         <section className="resume-section" aria-labelledby="work-heading">
-          <h2 id="work-heading">Recent work at Cleverbridge</h2>
+          <h2 id="work-heading">What I&apos;ve been focusing on recently</h2>
           <div className="resume-work-list">
             {resume.recentWork.map((item) => (
               <article className="resume-work-item" key={item.area}>
@@ -44,7 +44,6 @@ export default function ResumePage() {
 
         <section className="resume-section" aria-labelledby="experience-heading">
           <h2 id="experience-heading">Experience</h2>
-          <p className="resume-background">{resume.background}</p>
           <ol className="resume-career-list">
             {resume.experience.map((job) => (
               <li key={`${job.company}-${job.period}`}>

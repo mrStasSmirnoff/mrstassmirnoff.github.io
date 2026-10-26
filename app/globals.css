@@ -193,9 +193,8 @@ h2 { margin-bottom: 16px; font-size: clamp(2.25rem, 4vw, 3.65rem); font-weight: 
 .resume-work-item { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 28px; padding-block: 24px; border-top: 1px solid var(--line); }
 .resume-work-item h3 { color: var(--accent-dark); }
 .resume-work-item p { max-width: 72ch; }
-.resume-collaboration, .resume-background { max-width: 72ch; }
+.resume-collaboration { max-width: 72ch; }
 .resume-collaboration { margin-top: 12px; }
-.resume-background { margin-bottom: 24px; }
 .resume-career-list li { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px; padding-block: 18px; border-top: 1px solid var(--line); }
 .resume-period { color: var(--muted); font-size: 14px; }
 .resume-company { margin-top: 4px; color: var(--muted); font-size: 15px; }

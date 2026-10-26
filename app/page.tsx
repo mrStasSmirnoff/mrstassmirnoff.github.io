@@ -19,8 +19,9 @@ export default function Home() {
             <p className="hero-role">{siteConfig.role}, {siteConfig.location}</p>
             <p className="hero-intro">{siteConfig.intro}</p>
             <div className="button-row">
-              <Link className="button button-primary" href="/contact">Let&apos;s talk</Link>
               <Link className="button button-secondary" href="/blog">Read the blog</Link>
+              <Link className="button button-secondary" href="/resume">About me</Link>
+              <Link className="button button-primary" href="/contact">Let&apos;s talk</Link>
             </div>
           </div>
           <div className="portrait-wrap" aria-label={`Portrait of ${siteConfig.name}`}>
