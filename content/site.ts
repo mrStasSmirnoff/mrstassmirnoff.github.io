@@ -12,7 +12,6 @@ export const siteConfig = {
   github: "https://github.com/mrStasSmirnoff",
   linkedIn: "https://www.linkedin.com/in/smirnov-stanislav/",
   profileImage: "/title-page-photo-2.JPG",
-  resumePath: "/resume.pdf",
 };
 
 export const expertise = [

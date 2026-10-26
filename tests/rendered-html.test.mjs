@@ -34,9 +34,25 @@ test("recommendations have collapsed previews and retain their full text without
   assert.match(html, /36% relative uplift in recovery rates/);
 });
 
-test("exports the CV preview, original PDF, and correct contact link", () => {
-  assert.ok(readPage("resume/index.html").includes(`data="${basePath}/resume.pdf"`));
-  assert.ok(readFileSync(path.join(output, "resume.pdf")).subarray(0, 5).equals(Buffer.from("%PDF-")));
+test("exports a readable Resume page, links it from navigation, and keeps the PDF private", () => {
+  const html = readPage("resume/index.html").replaceAll("<!-- -->", "");
+  assert.ok(readPage("index.html").includes(`href="${basePath}/resume/"`));
+  assert.match(html, /<h1>Stanislav Smirnov<\/h1>/);
+  assert.match(html, /Senior Data Scientist, Payments/);
+  assert.match(html, /available upon request/);
+  assert.match(html, /mailto:mr\.stassmirnoff@hotmail\.com\?subject=Detailed%20CV%20request/);
+  assert.match(html, /Merchant of Record \(MoR\) platform handling dozens of millions/);
+  assert.equal((html.match(/class="resume-work-item"/g) ?? []).length, 4);
+  assert.match(html, /matched the PSP’s figures within 0\.01 pp and corrected for merchant mix/);
+  assert.match(html, /offline recall from ~44% to ~72% at the same 1% false-positive rate budget/);
+  assert.match(html, /roughly EUR 200K in annual vendor cost/);
+  assert.match(html, /recovered revenue by approximately 3x.*North American traffic/);
+  assert.match(html, /25–50% for in-scope transactions/);
+  assert.match(html, /expanded to &gt; 90% of the client base/);
+  assert.match(html, /University of Paderborn/);
+  assert.match(html, /April 2024 – Present/);
+  assert.doesNotMatch(html, /<object|<iframe|resume\.pdf|Download PDF/);
+  assert.equal(existsSync(path.join(output, "resume.pdf")), false);
   assert.match(readPage("contact/index.html"), /href="https:\/\/www\.linkedin\.com\/in\/smirnov-stanislav\/"/);
 });
 
