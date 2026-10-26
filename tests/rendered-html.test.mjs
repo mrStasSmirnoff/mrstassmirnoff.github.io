@@ -26,6 +26,8 @@ test("exports the home page with four recommendations and their portraits", () =
 test("home hero actions link to blog, about, and contact in that order", () => {
   const hero = readPage("index.html").match(/<section class="hero">([\s\S]*?)<\/section>/)?.[1];
   assert.ok(hero);
+  assert.equal((hero.match(/class="button button-secondary"/g) ?? []).length, 3);
+  assert.doesNotMatch(hero, /button-primary/);
   const actions = [...hero.matchAll(/<a class="button [^"]+" href="([^"]+)">([^<]+)<\/a>/g)]
     .map(([, href, label]) => [href, label.replaceAll("&#x27;", "'")]);
   assert.deepEqual(actions, [
@@ -68,6 +70,16 @@ test("exports a readable Resume page, links it from navigation, and keeps the PD
   assert.doesNotMatch(html, /<object|<iframe|resume\.pdf|Download PDF/);
   assert.equal(existsSync(path.join(output, "resume.pdf")), false);
   assert.match(readPage("contact/index.html"), /href="https:\/\/www\.linkedin\.com\/in\/smirnov-stanislav\/"/);
+});
+
+test("contact hides the printed email address but preserves the email action", () => {
+  const html = readPage("contact/index.html").replaceAll("<!-- -->", "");
+  const main = html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/)?.[1];
+  assert.ok(main);
+  // The address remains in mailto links; only the visible text should omit it.
+  assert.doesNotMatch(main.replace(/<[^>]*>/g, " "), /mr\.stassmirnoff@hotmail\.com/);
+  assert.match(main, /href="mailto:mr\.stassmirnoff@hotmail\.com">Email Stanislav<\/a>/);
+  assert.doesNotMatch(main, /You can also contact me on LinkedIn\./);
 });
 
 test("production does not enable the local Avenir preview and includes the font license", () => {

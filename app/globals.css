@@ -213,13 +213,11 @@ h2 { margin-bottom: 16px; font-size: clamp(2.25rem, 4vw, 3.65rem); font-weight: 
 .contact-card { border-radius: 14px; padding: 42px; background: white; box-shadow: var(--shadow); }
 .contact-label { margin: 25px 0 4px; color: var(--muted); font-size: 11px; font-weight: 760; letter-spacing: .1em; text-transform: uppercase; }
 .contact-label:first-child { margin-top: 0; }
-.contact-card > a { color: var(--accent); font-weight: 700; word-break: break-word; }
-.contact-card > p:not(.contact-label):not(.contact-note) { margin-bottom: 0; }
+.contact-card > p:not(.contact-label) { margin-bottom: 0; }
 .contact-links { display: flex; flex-direction: column; }
 .contact-links a { display: flex; justify-content: space-between; border-bottom: 1px solid var(--line); padding: 10px 0; font-weight: 700; }
 .contact-links a:first-child { border-top: 1px solid var(--line); }
 .contact-links span { color: var(--accent); }
-.contact-note { margin: 28px 0 0; color: var(--muted); font-size: 13px; }
 
 .not-found { min-height: 70vh; padding: 120px 0; }
 .not-found h1 { font-size: clamp(3.5rem, 8vw, 6.5rem); }

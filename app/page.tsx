@@ -21,7 +21,7 @@ export default function Home() {
             <div className="button-row">
               <Link className="button button-secondary" href="/blog">Read the blog</Link>
               <Link className="button button-secondary" href="/resume">About me</Link>
-              <Link className="button button-primary" href="/contact">Let&apos;s talk</Link>
+              <Link className="button button-secondary" href="/contact">Let&apos;s talk</Link>
             </div>
           </div>
           <div className="portrait-wrap" aria-label={`Portrait of ${siteConfig.name}`}>

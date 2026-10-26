@@ -1,5 +1,5 @@
 // GitHub supplies owner/repository in CI. This fallback matches the local remote.
-const [owner, repository] = (process.env.GITHUB_REPOSITORY || "mrStasSmirnoff/stanislavsmirnov.github.io").split("/");
+const [owner, repository] = (process.env.GITHUB_REPOSITORY || "mrStasSmirnoff/mrstassmirnoff.github.io").split("/");
 const host = `${owner.toLowerCase()}.github.io`;
 const repositoryPath = repository.toLowerCase() === host ? "" : `/${repository}`;
 
