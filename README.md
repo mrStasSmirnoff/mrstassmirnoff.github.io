@@ -44,8 +44,9 @@ This switch only affects development. `npm run dev` without it shows Nunito Sans
 
 - `content/site.ts`: profile and professional links.
 - `content/testimonials.ts` and `content/faqs.ts`: recommendations and FAQs.
+- `content/resume.ts`: the short Resume page, selected experience, skills, and education.
 - `content/blog/*.md`: articles with `title`, `date` (`YYYY-MM-DD`), `description`, and `tags` front matter.
-- `public/`: portraits, article images, and `resume.pdf`.
+- `public/`: portraits, article images, and font licences. The detailed CV is not published; the Resume page links to an email request.
 - `app/`: page layout and CSS.
 
 ## Deployment

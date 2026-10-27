@@ -19,8 +19,6 @@ export default function ContactPage() {
           <a className="button button-primary" href={`mailto:${siteConfig.email}`}>Email {siteConfig.name.split(" ")[0]}</a>
         </section>
         <aside className="contact-card">
-          <p className="contact-label">Email</p>
-          <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
           <p className="contact-label">Based in</p>
           <p>{siteConfig.location}</p>
           <p className="contact-label">Elsewhere</p>
@@ -28,7 +26,6 @@ export default function ContactPage() {
             <a href={siteConfig.linkedIn}>LinkedIn <span>↗</span></a>
             <a href={siteConfig.github}>GitHub <span>↗</span></a>
           </div>
-          <p className="contact-note">You can also contact me on LinkedIn.</p>
         </aside>
       </div>
     </main>
