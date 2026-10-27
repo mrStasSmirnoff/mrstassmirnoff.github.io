@@ -15,12 +15,26 @@ test("exports the home page with four recommendations and their portraits", () =
   assert.match(html, /Lead Data Scientist, Cologne, Germany/);
   assert.equal((html.match(/class="testimonial-card"/g) ?? []).length, 4);
   const names = [...html.matchAll(/aria-roledescription="slide" aria-label="\d+ of \d+: ([^"]+)"/g)].map((match) => match[1]);
-  assert.deepEqual(names, ["Maxime Regh", "Andreas Linn", "Shannon Kehoe", "Kcarlos"]);
+  assert.deepEqual(names, ["Andreas Linn", "Maxime Regh", "Shannon Kehoe", "Kcarlos"]);
   for (const filename of ["andreas-linn", "kcarlos", "maxime-regh", "shannon-kehoeai"]) {
     assert.ok(html.includes(`src="${basePath}/testimonials/${filename}.jpeg"`));
   }
   assert.match(html, /What languages do you speak\?/);
   assert.doesNotMatch(html, /Recommender name|Paste a concise LinkedIn recommendation/);
+});
+
+test("home hero actions link to blog, about, and contact in that order", () => {
+  const hero = readPage("index.html").match(/<section class="hero">([\s\S]*?)<\/section>/)?.[1];
+  assert.ok(hero);
+  assert.equal((hero.match(/class="button button-secondary"/g) ?? []).length, 3);
+  assert.doesNotMatch(hero, /button-primary/);
+  const actions = [...hero.matchAll(/<a class="button [^"]+" href="([^"]+)">([^<]+)<\/a>/g)]
+    .map(([, href, label]) => [href, label.replaceAll("&#x27;", "'")]);
+  assert.deepEqual(actions, [
+    [`${basePath}/blog/`, "Read the blog"],
+    [`${basePath}/resume/`, "About me"],
+    [`${basePath}/contact/`, "Let's talk"],
+  ]);
 });
 
 test("recommendations have collapsed previews and retain their full text without JavaScript", () => {
@@ -34,10 +48,38 @@ test("recommendations have collapsed previews and retain their full text without
   assert.match(html, /36% relative uplift in recovery rates/);
 });
 
-test("exports the CV preview, original PDF, and correct contact link", () => {
-  assert.ok(readPage("resume/index.html").includes(`data="${basePath}/resume.pdf"`));
-  assert.ok(readFileSync(path.join(output, "resume.pdf")).subarray(0, 5).equals(Buffer.from("%PDF-")));
+test("exports a readable Resume page, links it from navigation, and keeps the PDF private", () => {
+  const html = readPage("resume/index.html").replaceAll("<!-- -->", "");
+  assert.ok(readPage("index.html").includes(`href="${basePath}/resume/"`));
+  assert.match(html, /<h1>Stanislav Smirnov<\/h1>/);
+  assert.match(html, /Senior Data Scientist, Payments/);
+  assert.match(html, /available upon request/);
+  assert.match(html, /mailto:mr\.stassmirnoff@hotmail\.com\?subject=Detailed%20CV%20request/);
+  assert.match(html, /Senior Data Scientist in payments\. I lead ML and analytics work/);
+  assert.match(html, /What I&#x27;ve been focusing on recently/);
+  assert.doesNotMatch(html, /Before payments:|resume-background/);
+  assert.equal((html.match(/class="resume-work-item"/g) ?? []).length, 4);
+  assert.match(html, /matched the PSP’s figures within 0\.01 pp and corrected for merchant mix/);
+  assert.match(html, /offline recall from ~44% to ~72% at the same 1% false-positive rate budget/);
+  assert.match(html, /roughly EUR 200K in annual vendor cost/);
+  assert.match(html, /recovered revenue by approximately 3x.*North American traffic/);
+  assert.match(html, /25–50% for in-scope transactions/);
+  assert.match(html, /expanded to &gt; 90% of the client base/);
+  assert.match(html, /University of Paderborn/);
+  assert.match(html, /April 2024 – Present/);
+  assert.doesNotMatch(html, /<object|<iframe|resume\.pdf|Download PDF/);
+  assert.equal(existsSync(path.join(output, "resume.pdf")), false);
   assert.match(readPage("contact/index.html"), /href="https:\/\/www\.linkedin\.com\/in\/smirnov-stanislav\/"/);
+});
+
+test("contact hides the printed email address but preserves the email action", () => {
+  const html = readPage("contact/index.html").replaceAll("<!-- -->", "");
+  const main = html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/)?.[1];
+  assert.ok(main);
+  // The address remains in mailto links; only the visible text should omit it.
+  assert.doesNotMatch(main.replace(/<[^>]*>/g, " "), /mr\.stassmirnoff@hotmail\.com/);
+  assert.match(main, /href="mailto:mr\.stassmirnoff@hotmail\.com">Email Stanislav<\/a>/);
+  assert.doesNotMatch(main, /You can also contact me on LinkedIn\./);
 });
 
 test("production does not enable the local Avenir preview and includes the font license", () => {
